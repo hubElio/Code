@@ -1,0 +1,10 @@
+11:55:45 **** Incremental Build of configuration Debug for project Projet_1_system ****
+make all 
+Generating bif file for the system project
+generate_system_bif.bat 52565 C:/Users/Eliot/Documents/Code/amd/vitisWorkSpace/design_1_wrapper_1/export/design_1_wrapper_1/design_1_wrapper_1.xpfm standalone_ps7_cortexa9_0 C:/Users/Eliot/Documents/Code/amd/vitisWorkSpace/Projet_1_system/Debug/system.bif
+sdcard_gen --xpfm C:/Users/Eliot/Documents/Code/amd/vitisWorkSpace/design_1_wrapper_1/export/design_1_wrapper_1/design_1_wrapper_1.xpfm --sys_config design_1_wrapper_1 --bif C:/Users/Eliot/Documents/Code/amd/vitisWorkSpace/Projet_1_system/Debug/system.bif --bitstream C:/Users/Eliot/Documents/Code/amd/vitisWorkSpace/Projet_1/_ide/bitstream/design_1_wrapper.bit --elf C:/Users/Eliot/Documents/Code/amd/vitisWorkSpace/Projet_1/Debug/Projet_1.elf,ps7_cortexa9_0
+creating BOOT.BIN using C:/Users/Eliot/Documents/Code/amd/vitisWorkSpace/Projet_1/_ide/bitstream/design_1_wrapper.bit
+Running C:/Xilinx/Vitis/2023.1/bin/bootgen  -image C:/Users/Eliot/Documents/Code/amd/vitisWorkSpace/Projet_1_system/Debug/sd_card_temp/boot.bif -w -o i BOOT.BIN
+
+11:55:49 Build Finished (took 4s.717ms)
+

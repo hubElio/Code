@@ -1,0 +1,5 @@
+main.c:46:6:InitUart	4	static
+main.c:71:6:writeByte	16	static
+main.c:77:6:writeUart	24	static
+main.c:86:6:receiveByteUart	4	static
+main.c:93:5:main	16	static

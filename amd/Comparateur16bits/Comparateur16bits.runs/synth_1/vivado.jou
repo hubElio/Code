@@ -1,0 +1,14 @@
+#-----------------------------------------------------------
+# Vivado v2023.1.1 (64-bit)
+# SW Build 3900603 on Fri Jun 16 19:31:24 MDT 2023
+# IP Build 3900379 on Sat Jun 17 05:28:05 MDT 2023
+# SharedData Build 3899622 on Fri Jun 16 03:34:24 MDT 2023
+# Start of session at: Wed Oct 18 21:09:15 2023
+# Process ID: 15828
+# Current directory: C:/Users/Eliot/Comparateur16bits/Comparateur16bits.runs/synth_1
+# Command line: vivado.exe -log StateMachineUART.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source StateMachineUART.tcl
+# Log file: C:/Users/Eliot/Comparateur16bits/Comparateur16bits.runs/synth_1/StateMachineUART.vds
+# Journal file: C:/Users/Eliot/Comparateur16bits/Comparateur16bits.runs/synth_1\vivado.jou
+# Running On: LAPTOP-8T4ECO50, OS: Windows, CPU Frequency: 3110 MHz, CPU Physical cores: 4, Host memory: 16965 MB
+#-----------------------------------------------------------
+source StateMachineUART.tcl -notrace

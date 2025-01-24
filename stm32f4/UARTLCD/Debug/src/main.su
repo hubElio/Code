@@ -1,0 +1,7 @@
+main.c:50:6:InitUart	4	static
+main.c:75:6:writeByte	16	static
+main.c:81:6:writeUart	24	static
+main.c:90:6:receiveByteUart	4	static
+main.c:96:6:LectureCommande	16	static
+main.c:129:6:UART4_IRQHandler	4	static
+main.c:136:5:main	16	static

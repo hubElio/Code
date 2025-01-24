@@ -1,0 +1,1 @@
+--incr --debug "typical" --relax --mt "2" -L "xil_defaultlib" -L "secureip" --snapshot "ADD_7bits_behav" "xil_defaultlib.ADD_7bits" -log "elaborate.log" 

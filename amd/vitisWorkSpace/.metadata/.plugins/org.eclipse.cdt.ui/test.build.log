@@ -1,0 +1,25 @@
+23:33:22 **** Incremental Build of configuration Debug for project test ****
+make all 
+make --no-print-directory pre-build
+a9-linaro-pre-build-step
+' '
+make --no-print-directory main-build
+'Building file: ../src/main.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/main.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -IC:/Users/Eliot/Documents/Code/amd/vitisWorkSpace/design_1_wrapper/export/design_1_wrapper/sw/design_1_wrapper/standalone_ps7_cortexa9_0/bspinclude/include -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+'Finished building: ../src/main.c'
+' '
+'Building target: test.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -LC:/Users/Eliot/Documents/Code/amd/vitisWorkSpace/design_1_wrapper/export/design_1_wrapper/sw/design_1_wrapper/standalone_ps7_cortexa9_0/bsplib/lib -o "test.elf"  ./src/main.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+'Finished building target: test.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size test.elf  |tee "test.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  23217	   1176	  22584	  46977	   b781	test.elf
+'Finished building: test.elf.size'
+' '
+
+23:33:23 Build Finished (took 827ms)
+
