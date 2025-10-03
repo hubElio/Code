@@ -1,18 +1,19 @@
 
-
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 
 int main(int argc, char * argv[]) {
-    ARBRE arbre;
-    arbre = creer_arbre(2,creer_arbre(2,NULL,NULL),creer_arbre(3,NULL,NULL));
-    return 0;
-}
-
-ARBRE creer_arbre(int x,ARBRE arbreg,ARBRE arbred) {
-  ARBRE a = (ARBRE)malloc(sizeof(noeud));
-  if(a != NULL) {
-    a->ag = arbreg;
-    a->ad = arbred;
-    a->val = x;
+  char word[10] = "azertyuoip";
+  int word_lenght = 0;
+  while(word != NULL)
+  {
+      word_lenght++;
+      word++;
   }
-  return a;
+  word_lenght--;
+  printf("\n %d",word_lenght);
+
+  printf("\n %d",word_lenght + (word_lenght%8)*2 + (word_lenght%16)*3);
+  return 0;
 }
