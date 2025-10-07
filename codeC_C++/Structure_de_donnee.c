@@ -41,7 +41,7 @@ int main(int argc, char * argv[]){
     afficher_arbre_v1(creer_arbre(13,creer_arbre(15,creer_arbre(1,NULL,NULL),NULL),creer_arbre(9,NULL,NULL)));
     printf("\n");
     int bool = 0;
-    rehcerche_arbre(1,creer_arbre(13,creer_arbre(15,creer_arbre(1,NULL,NULL),NULL),creer_arbre(9,NULL,NULL)),&bool)
+    rehcerche_arbre(1,creer_arbre(13,creer_arbre(15,creer_arbre(1,NULL,NULL),NULL),creer_arbre(9,NULL,NULL)),&bool);
     printf("%d",bool);
     return 0;
 }
