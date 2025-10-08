@@ -1,0 +1,1 @@
+On windows install https://ffmpeg.org/download.html
