@@ -1,3 +1,7 @@
 .vscode/
 
 windows/
+
+Projects/AI/.AIvenv/
+
+.venv/
