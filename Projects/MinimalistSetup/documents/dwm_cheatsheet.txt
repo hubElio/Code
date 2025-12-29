@@ -1,0 +1,9 @@
+# ====================================================
+# To survive in dwm
+# ====================================================
+
+# 
+
+# <alt> + <shift> + <Enter> # open a new terminal
+# <alt> + <shift> + c # close a window
+# <alt> + <enter> # push active terminal to master

@@ -1,0 +1,30 @@
+===========================
+     VIM CHEAT SHEET
+===========================
+
+Movement
+arraows 
+gg / G start / end of file
+
+Editing
+i      insert just go to a line and hit i
+o      newline below
+x      delete character
+dd     delete line
+yy     yank line
+p      paste
+
+Undo / Redo
+u      undo
+Ctrl+r redo
+
+Search
+/text search forward
+n / N  next / previous match
+
+Save / Quit
+:w     write
+:q     quit
+:wq    write and quit
+:q!    quit without saving
+

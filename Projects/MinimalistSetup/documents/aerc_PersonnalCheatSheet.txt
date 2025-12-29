@@ -1,0 +1,27 @@
+# ====================================================
+# To survive in aerc
+# ====================================================
+
+# Install
+
+# sudo pacman -S aerc
+# configure with the youtube video on aerc (choose IMAP, the good ports to recieve and send email etc...)
+
+# Read emails
+
+# :cf INBOX # To go to inbox
+# arrows + <Enter> # To open the email
+# <ctlr> + K # To move between different files of the email (the text, the attachements, the html etc....
+# <Shift> + s # to save the file, give the path
+# f # to forward
+
+# Write a new email
+
+# <F2> or m #open the new email editor
+# write using vim (<escape>:wq #to save, <escape>i #to write)
+# <Enter> #to go to next step
+
+# Repond to an email
+
+# :cf INBOX # To go to inbox
+# <Enter> # To open the email
