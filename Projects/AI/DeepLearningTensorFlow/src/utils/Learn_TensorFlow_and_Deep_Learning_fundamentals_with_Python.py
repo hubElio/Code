@@ -10,9 +10,10 @@ from sklearn.metrics import confusion_matrix
 import itertools # to make the confusion matrix pretty
 from tensorflow.keras.datasets import fashion_mnist
 import random
+from tensorflow.keras.utils import plot_model
 
 # --------------------------------------------------------------
-# Learn the basics of TensorFlow and Deep Learning fundamentals with Python
+# Learn the basics of TensorFlow and Deep Learning fundamentals with Python 2021
 # Video https://www.youtube.com/watch?v=tpCFfeUEGs8&list=LL&index=13&t=7640s
 # part 2 https://www.youtube.com/watch?v=ZUKz4125WNI&t=57s
 # --------------------------------------------------------------
@@ -33,6 +34,9 @@ import random
 # numpy
 
 def learn_basics():
+    """
+    Docstring for learn_basics
+    """
     #===========================================================
     # Create tensors
     #===========================================================
@@ -128,6 +132,9 @@ def learn_basics():
     X_numpy = X.numpy()
 
 def Neural_Network_Regression():
+    """
+    Docstring for Neural_Network_Regression
+    """
     #--------------------------------------------------------------
     # Creating Inputs for a Neural Network Regression Model
     #--------------------------------------------------------------
@@ -381,13 +388,13 @@ def Neural_Network_Regression():
     pass
 
 def Larger_Regression_Example():
-    
-    #--------------------------------------------------------------
-    # A larger exemple (7:28 in video):
-    # We want to predict the insurance cost based on some features (it is a regression problem)
-    #--------------------------------------------------------------
+    """
+    Docstring for Larger_Regression_Example
+    A larger exemple (7:28 in video):
+    We want to predict the insurance cost based on some features (it is a regression problem)
+    """
 
-    # Lin k to data https://www.kaggle.com/datasets/mirichoi0218/insurance
+    # Link to data https://www.kaggle.com/datasets/mirichoi0218/insurance
 
     # Read in the insurancedata
     insurance = pd.read_csv("https://raw.githubusercontent.com/stedy/Machine-Learning-with-R-datasets/refs/heads/master/insurance.csv")
@@ -510,9 +517,10 @@ def Larger_Regression_Example():
     pass
 
 def Neural_Network_Classification():
-    #--------------------------------------------------------------
-    # Neural network classification (8:39 in video):
-    #--------------------------------------------------------------
+    """
+    Docstring for Neural_Network_Classification
+    Neural network classification (8:39 in video)
+    """
     # Multiclass classification : more than 2 classes to predict (ex: classifying images of clothes into categories like t-shirts, trousers, dresses, etc.)
     # Multilabel classification : more than 1 label to predict; multiple label options per sample (ex: tagging an article with multiple tags (one for each topic covered in the article))
     # sample : one piece of data
@@ -588,10 +596,11 @@ def Neural_Network_Classification():
     pass
 
 def non_linear():
-    #--------------------------------------------------------------
-    #  (0:00 in video part 2):
-    # the non linear data problem and binary classification problem
-    #--------------------------------------------------------------
+    """
+    Docstring for non_linear
+    (0:00 in video part 2):
+    the non linear data problem and binary classification problem
+    """
 
     # Make 1000 examples
     n_samples = 1000
@@ -626,10 +635,10 @@ def non_linear():
     pass
 
 def experiment_with_linear_non_linear_data():
-    #--------------------------------------------------------------
-    #  (00:35 in video part 2):
-    # 
-    #--------------------------------------------------------------
+    """
+    Docstring for experiment_with_linear_non_linear_data
+    (00:35 in video part 2):
+    """
 
     # Create a toy sensor
     A = tf.cast(tf.range(-10,10), tf.float32)
@@ -738,10 +747,10 @@ def experiment_with_linear_non_linear_data():
     pass
 
 def More_evaluation_Methodes():
-    #-----------------------------------
-    # More evaluation Methodes
-    # 1:37 in the video
-    #-----------------------------------
+    """
+    Docstring for More_evaluation_Methodes
+    1:37 in the video
+    """
     # Some metrics:
     # Accuracy, default for classification problems
     # Precision, more precision leads to less false positive
@@ -827,10 +836,10 @@ def More_evaluation_Methodes():
     pass
 
 def Multiclass_classification():
-    #--------------------------------------------------------------
-    # Multiclass classification 
-    # 2:10 in video
-    #--------------------------------------------------------------
+    """
+    Docstring for Multiclass_classification
+    2:10 in video
+    """
     # Different item of clothing example.
     # https://www.tensorflow.org/datasets/catalog/fashion_mnist?hl=fr
     
@@ -869,26 +878,179 @@ def Multiclass_classification():
     test_data = test_data / test_data.max()
 
     # a. Build model
-    model_multiclass = tf.keras.Sequential([
+    #model_multiclass = tf.keras.Sequential([
+    #    tf.keras.layers.Flatten(input_shape=(28,28)),# Need to fit the 28 * 28 pixel images.
+    #    tf.keras.layers.Dense(4, activation=tf.keras.activations.relu),
+    #    tf.keras.layers.Dense(4, activation=tf.keras.activations.relu),
+    #    tf.keras.layers.Dense(len(train_labels), activation=tf.keras.activations.softmax)# last layer is len(train_labels) because the output is one per label (hat, dress, ....), also the activation function for the output is not the same, softmax for multiclass classification
+    #])
+    # To understand Flatten layer
+    #flatten_model = tf.keras.layers.Flatten(input_shape=(28,28))
+    #print("\nflatten_model.output_shape) # it is (None, 724) = 28*28, you need to flatten your data before giving it to give to a layer (sometimes does it automatically)")
+    # b. Compile model
+    #model_multiclass.compile(loss=tf.keras.losses.SparseCategoricalCrossentropy,# Changed from binary to SparseCategoricalCrossentropy (CategoricalCrossentropy needs onehot representation, SparseCategoricalCrossentropy takes intergers)
+    #                optimizer=tf.keras.optimizers.Adam(),
+    #                metrics=["accuracy"])
+    # c. fit the model
+    #history = model_multiclass.fit(train_data,train_labels,epochs=10, validation_data=(test_data, test_labels), verbose=1)# added validation_data to also test our model afterwards
+
+    #2:55 in video 
+
+    # See the model history
+    #pd.DataFrame(history.history).plot(title="data loss curves")
+    #plt.show()
+
+    # Finding the ideal learning rate
+
+    # Set the random seed
+    tf.random.set_seed(42)
+
+    # Create model
+    #I. Create the learning rate callback
+    lr_scheduler = tf.keras.callbacks.LearningRateScheduler(lambda epoch: 1e-3 * 10**(epoch/20))
+
+    # a. Build model
+    model_multiclass2 = tf.keras.Sequential([
         tf.keras.layers.Flatten(input_shape=(28,28)),# Need to fit the 28 * 28 pixel images.
         tf.keras.layers.Dense(4, activation=tf.keras.activations.relu),
         tf.keras.layers.Dense(4, activation=tf.keras.activations.relu),
         tf.keras.layers.Dense(len(train_labels), activation=tf.keras.activations.softmax)# last layer is len(train_labels) because the output is one per label (hat, dress, ....), also the activation function for the output is not the same, softmax for multiclass classification
     ])
-    # To understand Flatten layer
-    # flatten_model = tf.keras.layers.Flatten(input_shape=(28,28))
-    # print("\nflatten_model.output_shape) # it is (None, 724) = 28*28, you need to flatten your data before giving it to give to a layer (sometimes does it automatically)
     # b. Compile model
-    model_multiclass.compile(loss=tf.keras.losses.SparseCategoricalCrossentropy,# Changed from binary to SparseCategoricalCrossentropy (CategoricalCrossentropy needs onehot representation, SparseCategoricalCrossentropy takes intergers)
+    model_multiclass2.compile(loss=tf.keras.losses.SparseCategoricalCrossentropy,# Changed from binary to SparseCategoricalCrossentropy (CategoricalCrossentropy needs onehot representation, SparseCategoricalCrossentropy takes intergers)
                     optimizer=tf.keras.optimizers.Adam(),
                     metrics=["accuracy"])
+
     # c. fit the model
-    history = model_multiclass.fit(train_data,train_labels,epochs=10, validation_data=(test_data, test_labels), verbose=1)# added validation_data to also test our model afterwards
-    #model_multiclass.summay()
+    history = model_multiclass2.fit(train_data,train_labels,epochs=10, validation_data=(test_data, test_labels), callbacks=[lr_scheduler], verbose=1)# added validation_data to also test our model afterwards
+    #model_multiclass2.summay()
 
-    #2:55 in video 
+    # II. compare the lr curves with the loss curve to find the ideal
+    # Plot the history
+    pd.DataFrame(history.history).plot(figsize=(10, 7), xlabel="epochs")
+    plt.title("model_works_nonlinear loss curves")
+    plt.show() #the green lr is exponential because it starts with 1e-4 and increasing by 10**(epoch/20) every epoch
+    # We can't really see the link bewteen lr value and loss, let's plot this
+    lrs = 1e-3 * (10 ** (tf.range(10)/20)) #10 because we did 10 epochs
+    print("\n len(lrs) : ", len(lrs), ", same number of epochs") #same number of epochs
+    plt.figure(figsize=(10,7))
+    plt.semilogx(lrs, history.history["loss"])# plot with log on th x axis
+    plt.xlabel("Learning Rate")
+    plt.ylabel("Loss")
+    plt.title("Learning rate vs Loss")
+    plt.show() # We want the lr value wherev the loss is the lowest. But we don't want instability in the learning, so we want the lr value where the loss curve is still decreasing but not flat (going up and down).
+    # let's maybe take 0.001, we are using Adam optimizer and the default lr of Adam is acctually 0.001, so we don't need to change it XD.
 
+    # d. !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Evaluate !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    loss, accuracy = model_multiclass2.evaluate(test_data, test_labels, verbose=0) # These are good infos, I am lazy let's just see the confusion matrix metric
+    
+    # Confusion matrix metrix
+    # Make predictions
+    y_probabilities = model_multiclass2.predict(test_data) # X is data, VERY IMPORTANT TO USE THE SAME DATA IT WAS TRAINNED ON (if normalized keep the normalized verion of the data)
+    print("\n y_probabilities[:5] : ", y_probabilities[:5]) # it is an array of probabilities for each class
+    #print("\n y_probabilities shape : ", y_probabilities.shape)
+    # each y_probabilities[i] is an array of 10 probabilities (one per class), we need to get the index of the highest probability
+    y_preds = tf.argmax(y_probabilities, axis=1) # get the index of the highest probability
+    print("\n y_preds[:10] : ", y_preds[:10]) # these are the predicted labels for each epoch.
+    make_confusion_matrix(test_labels, y_preds, classes=class_names, figsize=(20,20), text_size=15)
 
+    # Picks a random image, plots it and labels it with a prediction and truth label
+    # Load the data again because the data was normalized to train the model 
+    #(train_data, train_labels), (test_data, test_labels) = tf.keras.datasets.fashion_mnist.load_data()
+    #plot_random_image(model_multiclass2, test_data, test_labels, class_names) # This function doesn't work need to fix it :(
+    
+    # See input output shapes of each layers
+    #plot_model(model_multiclass2, show_shapes =True)
+    pass
+
+def plot_random_image(model, images, true_labels, class_names):
+    """
+    Picks a random image, plots it and labels it with a prediction and truth label
+    3:30 in the 2nd video
+    
+    :param model: Description
+    :param images: Description
+    :param true_labels: Description
+    :param class_names: Description
+    """
+    # set up a random interger
+    i = np.random.randint(0, len(images)) # get a random image index in the data set
+
+    # Create predictions and targets
+    target_image = images[i]
+    pred_probabilities = model.predict(target_image.reshape(1, 28, 28))
+    pred_label = class_names[tf.argmax(pred_probabilities, axis=1)]
+    true_label = class_names[true_labels[i]]
+
+    # plot the image
+    plt.imshow(target_image, cmap=plt.cm.binary)
+    # Change the title colour if the prediction is good or not
+    if pred_label == true_label:
+        color = "green"
+    else:
+        color = "red" 
+    # Add xlabel information (prediction/true label)
+    plt.xlabel("Pred: {} {:2.0f}% (True : {})".format(pred_label, 100*tf.reduce_max(pred_probabilities), true_label), color=color)
+    plt.show()
+    
+    pass
+
+def make_confusion_matrix(y_true, y_pred, classes=None, figsize=(10,10), text_size=15):
+    """
+    Docstring for make_confusion_matrix
+    See before in the code in function More_evaluation_Methodes to see another example.
+    
+    :param y_true: Description
+    :param y_pred: Description
+    :param classes: Description
+    :param figsize: Description
+    :param text_size: Description
+    """
+
+    # Create confucion matrix
+    cm =confusion_matrix(y_true, y_pred) #y_true = y_test and y_preds = model_x.predict(X_test)
+    print("\n\n",cm)
+    # !!!!!!!!!!!!!!!!!!!!!!!Make a pretty confudion matrix 🥰!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    cm_normalized = cm.astype("float") / cm.sum(axis=1)[:, np.newaxis] # normalize our confusion matrix
+    n_classes = cm.shape[0]
+    # prettify
+    fig, ax = plt.subplots(figsize=figsize)
+    cax = ax.matshow(cm, cmap=plt.cm.Blues)#don't confuse cm confusion matrix with the plt.cm color map
+    fig.colorbar(cax)
+    # Set labels to be classes
+
+    if classes:
+        labels = classes
+    else:
+        labels = np.arange(cm.shape[0])
+
+    #Label the axis
+    ax.set(title="Confusion Matrix", 
+           xlabel="Predicted labels", 
+           ylabel="True Label", 
+           xticks=np.arange(n_classes), 
+           yticks=np.arange(n_classes), 
+           xticklabels=labels, 
+           yticklabels=labels)
+    
+    # Set x-axis labels to bottom
+    ax.xaxis.set_label_position("bottom")
+    ax.xaxis.tick_bottom()
+    # Adjust label size
+    ax.yaxis.label.set_size(text_size)
+    ax.xaxis.label.set_size(text_size)
+    ax.title.set_size(text_size)
+
+    # Set threshold for different colours
+    threshold = (cm.max() + cm.min()) / 2. 
+    # Plot the text on each cell
+    for i, j in itertools.product(range(cm.shape[0]), range(cm.shape[1])):
+        plt.text(j, i, f"{cm[i, j]} ({cm_normalized[i, j]*100:.1f}%)",
+                 horizontalalignment="center",
+                 color="white" if cm[i, j] > threshold else "black",
+                 size=15)
+    plt.show()
+    # End of !!!!!!!!!!!!!!!!!!!!!!!Make a pretty confudion matrix 🥰!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     pass
 
 def plot_decision_boundary(model, X, y):
@@ -940,7 +1102,7 @@ def main():
     #Neural_Network_Classification()
     #non_linear()
     #experiment_with_linear_non_linear_data()
-    # More_evaluation_Methodes()
+    #More_evaluation_Methodes()
     Multiclass_classification()
     
 

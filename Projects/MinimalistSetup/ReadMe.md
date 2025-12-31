@@ -70,15 +70,17 @@ $ sudo pacman -S feh
 $ feh --bg-scale foobar.jpg
 3. put it in the .xinit to execute at startx launch
 
-
 Fonts:
 1. download a Nerd font (https://www.nerdfonts.com/font-downloads)
 2. unzip, leave in a directory, move to ~/.local/share/font
 3. change the dwm config.h file, mettre le nom du dossier.
 4. compile dwm
 
-dwmBlocks(time, battery, keyboard language, temperature, etc.....):
-1.
+dwmBlocks(time, battery, keyboard language, temperature, mail, sound (PLAYERCTL), pretty animation, etc.....):
+1. git clone du dwmBlocks
+2. changer le block.h à ta guise pour la personnalisation des blocks my man
+2. changer les flags de compilation dans le make file. ajouter -Wno-incompatible-pointer-types
+3. sudo make install
 
 compositioning, Transparent windows + blur & nice effects (doesn't work):
 1. Install compositioning stuff
@@ -90,7 +92,6 @@ $ transset .50
 4. Click the window you want to be transparent
 
 (- Desktop environnement : KDE plasma)
-(- use hyprland, etc)
 (- remote desktop : krdc)
 
 ## Mail
