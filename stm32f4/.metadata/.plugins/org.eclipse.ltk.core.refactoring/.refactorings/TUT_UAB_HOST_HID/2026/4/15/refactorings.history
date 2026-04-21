@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;TUT_UAB_HOST_HID/TUT_UAB_HOST_HID.ioc&apos; to &apos;USB_Host_test.ioc&apos;" description="Rename resource &apos;TUT_UAB_HOST_HID.ioc&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="TUT_UAB_HOST_HID.ioc" name="USB_Host_test.ioc" stamp="1775354613255" updateReferences="true"/>
+</session>

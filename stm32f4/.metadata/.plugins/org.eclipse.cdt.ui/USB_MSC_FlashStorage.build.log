@@ -1,0 +1,17 @@
+11:48:06 **** Incremental Build of configuration Debug for project USB_MSC_FlashStorage ****
+make -j12 all 
+arm-none-eabi-gcc "../USB_DEVICE/App/usbd_storage_if.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"USB_DEVICE/App/usbd_storage_if.d" -MT"USB_DEVICE/App/usbd_storage_if.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "USB_DEVICE/App/usbd_storage_if.o"
+../USB_DEVICE/App/usbd_storage_if.c: In function 'STORAGE_Init_FS':
+../USB_DEVICE/App/usbd_storage_if.c:191:6: error: implicit declaration of function 'is_flash_empty' [-Wimplicit-function-declaration]
+  191 |  if (is_flash_empty(MSC_FLASH_START_ADDR, MSC_FLASH_SIZE)) {
+      |      ^~~~~~~~~~~~~~
+../USB_DEVICE/App/usbd_storage_if.c:193:19: error: 'FM_FAT12' undeclared (first use in this function); did you mean 'FM_FAT32'?
+  193 |      f_mkfs("0:", FM_FAT12, 0, page_buffer, FLASH_PAGE_BUFFER_SIZE);
+      |                   ^~~~~~~~
+      |                   FM_FAT32
+../USB_DEVICE/App/usbd_storage_if.c:193:19: note: each undeclared identifier is reported only once for each function it appears in
+make: *** [USB_DEVICE/App/subdir.mk:25: USB_DEVICE/App/usbd_storage_if.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+
+11:48:06 Build Failed. 3 errors, 0 warnings. (took 357ms)
+

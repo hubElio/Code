@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;USB_MSC_RamStorage/USB_MSC.ioc&apos; to &apos;USB_MSC_RamStorage.ioc&apos;" description="Rename resource &apos;USB_MSC.ioc&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="USB_MSC.ioc" name="USB_MSC_RamStorage.ioc" stamp="1775315109201" updateReferences="true"/>
+</session>
