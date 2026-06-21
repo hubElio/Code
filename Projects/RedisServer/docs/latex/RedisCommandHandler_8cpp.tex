@@ -1,0 +1,44 @@
+\doxysection{src/\+\+Redis\+Command\+Handler.cpp File Reference}
+\hypertarget{RedisCommandHandler_8cpp}{}\label{RedisCommandHandler_8cpp}\index{src/RedisCommandHandler.cpp@{src/RedisCommandHandler.cpp}}
+
+
+Redis\+Command\+Handler handles command sent to the server. it parses it and sends a response.  
+
+
+{\ttfamily \+\#include "{}../\+include/\+\+Redis\+Command\+Handler.\+h"{}}\newline
+{\ttfamily \+\#include $<$vector$>$}\newline
+{\ttfamily \+\#include $<$sstream$>$}\newline
+{\ttfamily \+\#include $<$algorithm$>$}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std::\+vector$<$ std::\+string $>$ \doxymbox{\hyperlink{RedisCommandHandler_8cpp_a30964c880184a0076f16609f943ce784}{parse\+Resp\+Command}} (const std::\+string \&input)
+\begin{DoxyCompactList}\small\item\em Parses the inputs. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Redis\+Command\+Handler handles command sent to the server. it parses it and sends a response. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{RedisCommandHandler_8cpp_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{RedisCommandHandler_8cpp_a30964c880184a0076f16609f943ce784}\index{RedisCommandHandler.cpp@{RedisCommandHandler.cpp}!parseRespCommand@{parseRespCommand}}
+\index{parseRespCommand@{parseRespCommand}!RedisCommandHandler.cpp@{RedisCommandHandler.cpp}}
+\doxysubsubsection{\texorpdfstring{parseRespCommand()}{parseRespCommand()}}
+{\footnotesize\ttfamily \label{RedisCommandHandler_8cpp_a30964c880184a0076f16609f943ce784} 
+std::\+vector$<$ std::\+string $>$ parse\+Resp\+Command (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{input}{}\end{DoxyParamCaption})}
+
+
+
+Parses the inputs. 
+
+RESP parser :\+ \texorpdfstring{$\ast$}{*}2\textbackslash{}r\textbackslash{}n\$4\textbackslash{}r\textbackslash{}n\textbackslash{}PING\textbackslash{}r\textbackslash{}n\$4\textbackslash{}r\textbackslash{}n\+TEST\textbackslash{}r\textbackslash{}n2\texorpdfstring{$\ast$}{*} means 2 elements (here ping and test), \$4 is for 4 caracters (T E S T and P I N G) 
+\begin{DoxyParams}{Parameters}
+{\em input} & a string \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+tokens vector of strings with the commands 
+\end{DoxyReturn}
