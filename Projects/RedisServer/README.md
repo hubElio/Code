@@ -1,1 +1,0 @@
-je suis à la vidéo 6 de REDISserver
