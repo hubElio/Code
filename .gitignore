@@ -7,3 +7,14 @@ Projects/AI/.AIvenv/
 .venv/
 
 CodeC_C++/cpp/
+
+# STM32 / Eclipse / CubeIDE
+.metadata/
+**/.metadata/
+.settings/
+*.log
+*.pdom
+Debug/
+Release/
+build/
+cmake-build-*/
