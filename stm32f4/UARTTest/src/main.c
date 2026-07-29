@@ -95,6 +95,10 @@ int main(void)
   //char reception;
   InitUart();
 
+  RCC->AHB1ENR |= RCC_AHB1ENR_GPIODEN;
+  GPIOD->MODER = 0x55000000; // configure pins 12-15 en output
+  GPIOD->ODR ^= (1 << 13);
+
 
   /* TODO - Add your application code here */
 

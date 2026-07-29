@@ -3,6 +3,7 @@
 	<item key="hasShownOverlayPopupBefore" value="true"/>
 	<item key="replaceBarOpen" value="false"/>
 	<list key="searchhistory">
+		<item value="Reset_Handler"/>
 		<item value="GPIO_InitStruct"/>
 		<item value="STORAGE_Init_FS"/>
 	</list>

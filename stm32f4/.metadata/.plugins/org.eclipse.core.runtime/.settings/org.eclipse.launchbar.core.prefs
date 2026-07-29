@@ -1,7 +1,16 @@
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/arch=x86_64
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/name=Local
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/os=win32
-configDescList=org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:USB_MSC,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Lab2,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:RTOS_test
+configDescList=org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:USB_MSC,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Lab2,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:RTOS_test,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:RTOS_UART,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:UARTTest,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Flash_test,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Boot_App_Test,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Custom_Boot
 eclipse.preferences.version=1
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Boot_App_Test/activeLaunchMode=debug
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Boot_App_Test/activeLaunchTarget=null\:---
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Custom_Boot/activeLaunchMode=run
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Custom_Boot/activeLaunchTarget=null\:---
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Flash_test/activeLaunchMode=run
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:RTOS_UART/activeLaunchMode=run
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:RTOS_UART/activeLaunchTarget=null\:---
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:RTOS_test/activeLaunchMode=run
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:RTOS_test/activeLaunchTarget=null\:---
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:UARTTest/activeLaunchMode=run
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:UARTTest/activeLaunchTarget=null\:---

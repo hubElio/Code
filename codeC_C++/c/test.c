@@ -14,7 +14,7 @@ typedef struct liste{
 }liste;
 struct liste * maliste;
 
-int main(int argc, char * argv)
+int main(int argc, char ** argv)
 {
     /*
     int tableau[10]; 
@@ -28,9 +28,12 @@ int main(int argc, char * argv)
     */
     //int tableau[10] = {0}; 
     //tableau[4],tableau[5],tableau[6] = 12,12,12; 
-    int test;
+    // int test;
 
-    test = 1 << 2;
-    printf("\n%d",test);
+    // test = 1 << 2;
+    // printf("\n%d",test);
+
+
+    
     return 0;
 }

@@ -117,6 +117,7 @@ void StartTaskProcessing(void *argument);
 int main(void)
 {
 
+
   /* USER CODE BEGIN 1 */
 
   /* USER CODE END 1 */
@@ -396,7 +397,7 @@ void StartTask_Usart1Rx(void *argument)
 {
   /* USER CODE BEGIN 5 */
   /* debug */
-  //HAL_UART_Transmit(&huart1, "RX Start\r\n", 13, 1000);
+  //HAL_UART_Transmit(&huart1, "RX Start", 13, 1000);
   /* end debug */
   HAL_StatusTypeDef status;
   osDelay(50); // wait for UART to be ready

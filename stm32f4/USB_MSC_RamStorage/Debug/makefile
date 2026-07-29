@@ -38,34 +38,34 @@ $(wildcard ../makefile.init) \
 $(wildcard ../makefile.targets) \
 
 
-BUILD_ARTIFACT_NAME := USB_MSC
+BUILD_ARTIFACT_NAME := USB_MSC_RamStorage
 BUILD_ARTIFACT_EXTENSION := elf
 BUILD_ARTIFACT_PREFIX :=
 BUILD_ARTIFACT := $(BUILD_ARTIFACT_PREFIX)$(BUILD_ARTIFACT_NAME)$(if $(BUILD_ARTIFACT_EXTENSION),.$(BUILD_ARTIFACT_EXTENSION),)
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXECUTABLES += \
-USB_MSC.elf \
+USB_MSC_RamStorage.elf \
 
 MAP_FILES += \
-USB_MSC.map \
+USB_MSC_RamStorage.map \
 
 SIZE_OUTPUT += \
 default.size.stdout \
 
 OBJDUMP_LIST += \
-USB_MSC.list \
+USB_MSC_RamStorage.list \
 
 
 # All Target
 all: main-build
 
 # Main-build Target
-main-build: USB_MSC.elf secondary-outputs
+main-build: USB_MSC_RamStorage.elf secondary-outputs
 
 # Tool invocations
-USB_MSC.elf USB_MSC.map: $(OBJS) $(USER_OBJS) C:\Users\eerva\Documents\Code\stm32f4\USB_MSC\STM32F407VGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "USB_MSC.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\eerva\Documents\Code\stm32f4\USB_MSC\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="USB_MSC.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+USB_MSC_RamStorage.elf USB_MSC_RamStorage.map: $(OBJS) $(USER_OBJS) C:\Users\eerva\Documents\Code\stm32f4\USB_MSC_RamStorage\STM32F407VGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "USB_MSC_RamStorage.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\eerva\Documents\Code\stm32f4\USB_MSC_RamStorage\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="USB_MSC_RamStorage.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -74,14 +74,14 @@ default.size.stdout: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	@echo 'Finished building: $@'
 	@echo ' '
 
-USB_MSC.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "USB_MSC.list"
+USB_MSC_RamStorage.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "USB_MSC_RamStorage.list"
 	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) USB_MSC.elf USB_MSC.list USB_MSC.map default.size.stdout
+	-$(RM) USB_MSC_RamStorage.elf USB_MSC_RamStorage.list USB_MSC_RamStorage.map default.size.stdout
 	-@echo ' '
 
 secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST)

@@ -92,6 +92,9 @@ void HardFault_Handler(void)
   /* USER CODE END HardFault_IRQn 0 */
   while (1)
   {
+	    __HAL_RCC_GPIOD_CLK_ENABLE();
+	    GPIOD->MODER = 0x55000000; // configure pins 12-15 en output
+	    GPIOD->ODR ^= (1 << 13);
     /* USER CODE BEGIN W1_HardFault_IRQn 0 */
     /* USER CODE END W1_HardFault_IRQn 0 */
   }
