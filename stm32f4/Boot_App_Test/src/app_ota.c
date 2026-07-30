@@ -11,6 +11,7 @@
 #include "app_ota.h"
 #include "flash_operations.h"
 #include "macros_utiles.h"
+#include "app_header.h"
 
 #define OTA_FLAG_START		1
 #define OTA_FLAG_CLEAR		0

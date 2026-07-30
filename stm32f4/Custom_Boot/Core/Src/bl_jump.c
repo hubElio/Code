@@ -4,11 +4,6 @@
 #include "app_header.h"
 #include "crc.h"
 
-#define APP_MAGIC 0xABCDEFAB
-#define APP_HEADER_ADDR 0x08008000
-#define APP_START_ADDR  0x0800C000
-#define APP_MAX_SIZE    0xABCDEFAB
-
 
 typedef void (*pFunction)(void);
 
@@ -51,7 +46,7 @@ int bootloader_is_app_valid(void) {
     const app_header_t *app_hdr = (const app_header_t *)HDR_ADDR;
 
     // 1 Magic number
-    if(app_hdr->magic_number != APP_MAGIC) {
+    if(app_hdr->magic != APP_MAGIC) {
         return 1;
     }
 
@@ -62,14 +57,14 @@ int bootloader_is_app_valid(void) {
     }
 
     // 3 Size sanity
-    if(app_hdr->app_size == 0 || app_hdr->app_size > APP_MAX_SIZE) {
+    if(app_hdr->size == 0 || app_hdr->size > APP_MAX_SIZE) {
     	return 3;
     }
 
     // 4 CRC check
-    uint32_t calc_crc = calculate_crc32((const uint8_t *)APP_START_ADDR, app_hdr->app_size);
+    uint32_t calc_crc = calculate_crc32((const uint8_t *)APP_START_ADDR, app_hdr->size);
 
-    if(calc_crc != app_hdr->app_crc) { 
+    if(calc_crc != app_hdr->crc) {
     	return 4;
     }
 

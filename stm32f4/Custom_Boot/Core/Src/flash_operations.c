@@ -1,11 +1,56 @@
 #include "stm32f4xx.h"
+#include "flash_operations.h"
 
 /* ===========================
    DEFINES MANQUANTS POUR CMSIS
    =========================== */
 
-#define FLASH_CR_SNB_Pos 3U
-#define FLASH_CR_SNB_Msk (0xFU << FLASH_CR_SNB_Pos)
+#define OTA_FLAG_ADDRESS      0x08008000
+#define APP_START_ADDR        0x0800C000
+#define APP_HEADER_ADDR       0x08008000
+#define APP_HEADER_SECTOR     2
+#define APP_START_SECTOR      3
+#define APP_END_SECTOR        11
+#define APP_MAGIC             0xDEADBEEF
+#define APP_MAX_SIZE          (256 * 1024)
+
+uint32_t flash_read_ota_flag(void) {
+    uint32_t data;
+    Flash_ReadWord(OTA_FLAG_ADDRESS, &data);
+    return data;
+}
+
+uint32_t flash_erase_app(void) {
+        FLASH_EraseInitTypeDef erase;
+    uint32_t error;
+
+    erase.TypeErase    = FLASH_TYPEERASE_SECTORS;
+    erase.VoltageRange = FLASH_VOLTAGE_RANGE_3;
+    erase.Sector       = APP_START_SECTOR;
+    erase.NbSectors    = (APP_END_SECTOR - APP_START_SECTOR) + 1;
+
+    HAL_FLASHEx_Erase(&erase, &error);
+    return error;
+}
+
+uint32_t flash_erase_header (void)
+{
+    FLASH_EraseInitTypeDef erase;
+    uint32_t error;
+
+    erase.TypeErase    = FLASH_TYPEERASE_SECTORS;
+    erase.VoltageRange = FLASH_VOLTAGE_RANGE_3;
+    erase.Sector       = APP_HEADER_SECTOR;
+    erase.NbSectors    = 1;
+
+    HAL_FLASHEx_Erase(&erase, &error);
+    return error;
+}
+
+void flash_write_word(uint32_t addr, uint32_t data)
+{
+    HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD, addr, data);
+}
 
 void Flash_Unlock(void)
 {

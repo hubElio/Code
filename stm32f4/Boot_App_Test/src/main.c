@@ -94,10 +94,10 @@ char receiveByteUart(){
 __attribute__((section(".header"))) const app_header_t app_header =
 {
 	.ota_flag = 1,
-	.magic_number = 0xABCDEFAB,
-	.app_version = 0,
-	.app_size = 1368,
-	.app_crc = 0x9E98FC31
+	.magic_number = 0xDEADBEEF,
+	.app_size = 0,
+	.app_crc = 0,
+	.app_version = 0
 };
 
 
@@ -108,10 +108,6 @@ int main(void)
 
   //enable_ota_request();
 
-  RCC->AHB1ENR |= RCC_AHB1ENR_GPIODEN;
-  GPIOD->MODER = 0x55000000; // configure pins 12-15 en output
-  GPIOD->ODR ^= (1 << 12);
-
   writeByte('H');
   writeByte('E');
   writeByte('Y');
@@ -121,11 +117,15 @@ int main(void)
   /* TODO - Add your application code here */
 
   /* Infinite loop */
+  RCC->AHB1ENR |= RCC_AHB1ENR_GPIODEN;
+  	GPIOD->MODER = 0x55000000; // configure pins 12-15 en output
   while (1)
   {
+  	GPIOD->ODR ^= (1 << 12);
+	for(int i = 0; i < 1000000; i++); // delay
 	//writeUart("Hello World");
-	char reception = receiveByteUart();
+	//char reception = receiveByteUart();
 
-	writeByte(reception);
+	//writeByte(reception);
   }
 }

@@ -23,6 +23,7 @@
 /* USER CODE BEGIN Includes */
 #include "bl_jump.h"
 #include "bl_ota.h"
+#include "ota_image.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -32,6 +33,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+
 
 /* USER CODE END PD */
 
@@ -57,6 +59,26 @@ static void MX_UART4_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+
+static uint32_t mem_base = 0;  // used with external or dual flash
+static uint32_t mem_cursor = 0;
+static uint32_t ota_image_total_size = 16;  // expected OTA Header size
+
+void ota_mem_set_total_size(uint32_t size)
+{
+    ota_image_total_size = size;
+}
+
+int ota_read_mem(uint8_t *buf, uint32_t len)
+{
+    if (mem_cursor + len > ota_image_total_size)
+        return -1;
+
+    memcpy(buf, &ota_image_bin[mem_base + mem_cursor], len);  // this function should be replaced accordingly
+
+    mem_cursor += len;
+    return 0;
+}
 
 /* USER CODE END 0 */
 
@@ -91,39 +113,68 @@ int main(void)
   MX_GPIO_Init();
   MX_UART4_Init();
   /* USER CODE BEGIN 2 */
-  HAL_Delay(1000); // Delay for 1 second before jumping to the application
-  RCC->AHB1ENR |= RCC_AHB1ENR_GPIODEN;
-  GPIOD->MODER = 0x55000000; // configure pins 12-15 en output
+  HAL_Delay(100);
+  RCC->AHB1ENR |= RCC_AHB1ENR_GPIODEN;          // Active l'horloge de GPIOD
+  GPIOD->MODER = (GPIOD->MODER & ~(3U << (13*2))) | (1U << (13*2)); // PD13 en sortie
+  GPIOD->ODR |= (1U << 13);
 
+  // TEST FLASH//
 
-  //Check if OTA request is present
-  if(check_ota_request() == 1) {
-    HAL_UART_Transmit(&huart4, (uint8_t *)"OTA request detected. Jumping to OTA...\n", 39, HAL_MAX_DELAY);
-    clear_ota_flag(); // Clear the OTA request flag
-  }
-  int err = 0;
-  err = bootloader_is_app_valid();
-  if(err == 1) {
-    //GPIOD->ODR ^= (1 << 12);
-    HAL_UART_Transmit(&huart4, (uint8_t *)"Erreur magic number", 21, HAL_MAX_DELAY);
-  }
-  else if(err == 2) {
-    //GPIOD->ODR ^= (1 << 13);
-    HAL_UART_Transmit(&huart4, (uint8_t *)"Erreur Reset handler sanity", 30, HAL_MAX_DELAY);
-  }
-  else if(err == 3) {
-    //GPIOD->ODR ^= (1 << 14);
-    HAL_UART_Transmit(&huart4, (uint8_t *)"Erreur Taille", 15, HAL_MAX_DELAY);
-  }
-  else if(err == 4) {
-    //GPIOD->ODR ^= (1 << 15);
-    HAL_UART_Transmit(&huart4, (uint8_t *)"Erreur CRC\n", 13, HAL_MAX_DELAY);
-  }
-  //char msg[50];
-  //sprintf(msg, "CRC calculé : %lu\r\n", bootloader_is_app_valid());
-  //HAL_UART_Transmit(&huart4, (uint8_t*)msg, strlen(msg), HAL_MAX_DELAY);
+  // TEST FLASH//
 
-  HAL_UART_Transmit(&huart4, (uint8_t *)"Jumping to application...\n", 28, HAL_MAX_DELAY);
+  HAL_UART_Transmit(&huart4, (uint8_t *)"Inside Bootloader!!\r\n", 21, 100);
+
+  if (check_ota_request() != 0)//check_ota_request() == 0
+  {
+	  HAL_UART_Transmit(&huart4, (uint8_t *)"Performing OTA...\n", 18, 100);
+
+	  ota_stream_t stream =
+	  {
+	      .read = ota_read_mem,
+	      .set_total_size = ota_mem_set_total_size
+	  };
+
+	  bl_ota_ctx_t ctx;
+	 if (bl_ota_run(&ctx, &stream) != 0)
+	 {
+		 HAL_UART_Transmit(&huart4, (uint8_t *)"OTA Failed...\n", 14, 100);
+		  while (1)
+		  {
+			  HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_12);
+			  HAL_Delay(250);
+		  }
+	 }
+	 else {
+		 HAL_UART_Transmit(&huart4, (uint8_t *)"OTA Flashed Successfully, Jumping to app...\n", 44, 100);
+	 }
+
+  }
+  int err = bootloader_is_app_valid();
+  if (err != 0)
+  {
+	  HAL_UART_Transmit(&huart4, (uint8_t *)"Failed to Jump!! ", 17, 100);
+	  switch (err){
+	  case 1:
+		  HAL_UART_Transmit(&huart4, (uint8_t *)"MAGIC ERROR!!\r\n", 15, 100);
+		  break;
+
+	  case 2:
+		  HAL_UART_Transmit(&huart4, (uint8_t *)"RESET ERROR!!\r\n", 15, 100);
+		  break;
+
+	  case 3:
+		  HAL_UART_Transmit(&huart4, (uint8_t *)"SIZE ERROR!!\r\n", 14, 100);
+		  break;
+
+	  case 4:
+		  HAL_UART_Transmit(&huart4, (uint8_t *)"CRC ERROR!!\r\n", 13, 100);
+		  break;
+
+	  default:
+		  HAL_UART_Transmit(&huart4, (uint8_t *)"ERROR!!\r\n", 9, 100);
+		  break;
+	  }
+  }
    
   JumpToApplication(); // Jump to the application
   /* USER CODE END 2 */
